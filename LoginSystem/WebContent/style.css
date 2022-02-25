@@ -1,0 +1,215 @@
+// Reference/Ideas
+// https://colorlib.com/wp/wp-content/uploads/sites/2/kero-adnin-panel-template.jpg
+// https://colorlib.com/wp/wp-content/uploads/sites/2/metrom-premium-admin-dashboard.jpg
+
+// Colours
+$secondary : #ea4774;
+$primary : #dc2430;
+$halfWhite : rgba(white, 0.5);
+$qtrWhite : rgba(white, 0.25);
+
+// Spacing
+$bodyPad: 20px;
+
+* {	box-sizing: border-box; }
+
+body {
+	height: 100%;
+	width: 100%;
+	padding: $bodyPad;
+	margin: 0;
+	font-family: 'Assistant', sans-serif;
+}
+
+.colours {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	p {
+		display: inline-block;
+		margin-right: 10px;
+		&:last-child { margin-right: 0; }
+	}
+}
+
+.admin-panel {
+	display: flex;
+}
+
+.menu {
+	border-radius: 7.5px;
+	background: -webkit-linear-gradient(-45deg, $primary 0%, $secondary 100%);
+	min-height: calc(100vh - #{$bodyPad * 2});
+	padding: 15px 15px 0;
+	width: 50px;
+	transition: width 0.25s;
+	overflow: hidden;
+	display: inline-block;
+	&.active {
+		width: 200px;
+		.heading p { opacity: 1; }
+		.wrap {
+			opacity: 1;
+			height: auto;
+		}
+		.menu-icon {
+			span {
+				transform: rotateY(90deg);
+				&:first-child { transform: rotate(-45deg); }
+				&:last-child { transform: rotate(45deg); }
+				&:first-child { top: 0; }
+				&:last-child { top: 2px; }
+			}
+		}
+	}
+	.wrap {
+							// Width - padding x2
+		min-width: calc(200px - 30px);
+		opacity: 0;
+		transition: width 0.25s, opacity 0.25s;
+		height: 0;
+    overflow: hidden;
+	}
+	.heading {
+		padding: 0 0 15px;
+		margin-bottom: 10px;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		overflow: hidden;
+		border-bottom: 1px solid $halfWhite;
+		p {
+			transition: opacity 0.25s;
+			opacity: 0;
+			padding: 0;
+			margin: 0;
+			width: 100%;
+		}
+		.menu-icon {
+			position: absolute;
+			right: 0;
+			top: 0;
+			cursor: pointer;
+			height: 14px;
+			width: 20px;
+			// overflow: hidden;
+			span {
+				transition: transform 0.25s, right 0.25s;
+				&:first-child { transform-origin: top right; }
+				&:last-child { transform-origin: bottom right; }
+				&:first-child,
+				&:last-child { position: relative; right: 3px; }
+			}
+			p { margin: 0; padding: 0; }
+			span {
+				width: 100%;
+				height: 2px;
+				display: block;
+				margin-bottom: 4px;
+				background-color: white;
+			}
+		}
+	}
+	.dropdown {
+		p { cursor: pointer; }
+		position: relative;
+		&:before {
+			position: absolute;
+			top: 8px; right: 0;
+			height: 0; width: 0;
+			border-top: 5px solid transparent;
+			border-left: 8px solid white;
+			border-bottom: 5px solid transparent;
+			content: '';
+			transition: transform 0.25s;
+		}
+		
+		&.js-opened:before { transform: rotate(90deg); }
+		
+		a { margin-left: 10px; }
+		+ a { margin-top: 0; }
+		+ .title { margin-top: 5px; }
+		
+		.links {
+			overflow: hidden;
+			a {
+				position: relative;
+				padding-left: 10px;
+				z-index: 1;
+				&:before {
+					z-index: -1;
+					$bulletSize: 4px;
+					position: absolute;
+					left: 0;
+					top: calc(50% - #{$bulletSize / 2});
+					content: '';
+					display: inline-block;
+					vertical-align: middle;
+					width: $bulletSize; height: $bulletSize;
+					background-color: white;
+					border-radius: $bulletSize;
+					transition: background-color 0.25s, border-radius 0.25s, width 0.25s, height 0.25s, top 0.25s;
+				}
+				&:hover:before {
+					background-color: $qtrWhite;
+					border-radius: 15px;
+					width: 100%;
+					height: 100%;
+					top: 0;
+				}
+			}
+		}
+	}
+	.title {
+		color: rgba(white, 0.75);
+		border-top: 1px solid $halfWhite;
+		padding-top: 10px; margin-top: 10px;
+	}
+	a { text-decoration: none; }
+	p { cursor: default; }
+	a, p {
+		margin: 5px 0;
+		padding: 5px 0;
+		display: block;
+		color: white;
+		font-size: 14px;
+		line-height: 16px;
+	}
+}
+
+
+.content {
+	border: 1px solid rgba(black, 0.15);
+	display: flex;
+	flex-wrap: wrap;
+	flex-grow: 1;
+	// background-color: rgba(black, 0.1);
+	margin-left: 20px;
+	border-radius: 7.5px;
+	overflow: hidden;
+	.header {
+		width: 100%;
+		min-height: 50px;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid $halfWhite;
+		padding: 10px 20px;
+		background: -webkit-linear-gradient(-45deg, rgba(black, 0.01) 0%, rgba(black, 0.1) 100%);
+		p, a {
+			margin: 5px 0;
+			color: $primary;
+		}
+		p { margin-right: 10px;}
+		a { color: $primary; }
+	}
+	.body {
+		padding: 20px;
+		display: flex;
+		width: 100%;
+		background: -webkit-linear-gradient(-45deg, rgba(black, 0.01) 0%, rgba(black, 0.1) 100%);
+		height: 100%;
+	}
+}
