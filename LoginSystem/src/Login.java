@@ -20,9 +20,8 @@ public class Login extends HttpServlet {
         }
         else
         {
-           out.println("Username or Password incorrect");
-           RequestDispatcher rs = request.getRequestDispatcher("index.html");
-           rs.include(request, response);
+        	request.getRequestDispatcher("index.html").include(request, response);
+        	out.println("<script>document.getElementById('error').innerHTML='Invalid Credential'; </script>");  
         }
     }  
     

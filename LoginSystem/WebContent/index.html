@@ -119,9 +119,9 @@ input{
     </div>
     <form method="post" action="login">
         <h3>Login</h3>
-
+        <center><div id="error" style="color:red;font-size:15px"></div></center>
         <label for="username">Username</label>
-        <input type="email" placeholder="Email " id="username" name="email" required>
+        <input type="email" placeholder="Email " id="username" name="email" onfocus="hiderror();" required>
 
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="password"  name="pass" required>
@@ -129,7 +129,13 @@ input{
         
        
     </form>
-    
+    <script>
+        function hiderror()
+        {
+        		
+        	document.getElementById('error').innerHTML=''; 
+        }
+    </script>
 </body>
 </html>
 
